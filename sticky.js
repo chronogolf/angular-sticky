@@ -14,6 +14,7 @@ angular.module("sticky", []).directive("sticky", ['$window', function($window) {
             var item = scope._stickyElements[i];
 
             if (!item.isStuck && pos > item.start) {
+              item.element.css({ width: item.element.outerWidth() + "px" });
               item.element.addClass("stuck");
               item.isStuck = true;
 
@@ -25,6 +26,7 @@ angular.module("sticky", []).directive("sticky", ['$window', function($window) {
             }
             else if (item.isStuck && pos < item.start) {
               item.element.removeClass("stuck");
+              item.element.css({ width: "auto" });
               item.isStuck = false;
 
               if (item.placeholder) {
