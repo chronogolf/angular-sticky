@@ -1,4 +1,4 @@
-angular.module("sticky", []).directive("sticky", ['$window', function($window) {
+angular.module("sticky", []).directive("sticky", ['$window', '$timeout', function($window, $timeout) {
   return {
     link: function(scope, element, attrs) {
 
@@ -51,14 +51,15 @@ angular.module("sticky", []).directive("sticky", ['$window', function($window) {
         $win.bind("resize", recheckPositions);
       }
 
-      var item = {
-        element: element,
-        isStuck: false,
-        placeholder: attrs.usePlaceholder !== undefined,
-        start: element.offset().top
-      };
-
-      scope._stickyElements.push(item);
+      $timeout(function(){
+        var item = {
+          element: element,
+          isStuck: false,
+          placeholder: attrs.usePlaceholder !== undefined,
+          start: element.offset().top
+        };
+        scope._stickyElements.push(item);
+      });
 
     }
   };
