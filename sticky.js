@@ -14,13 +14,13 @@ angular.module("sticky", []).directive("sticky", ['$window', '$timeout', functio
             var item = scope._stickyElements[i];
 
             if (!item.isStuck && pos > item.start) {
-              item.element.css({ width: item.element.outerWidth() + "px" });
+              item.element.css({ width: item.element.outerWidth(false) + "px" });
               item.element.addClass("stuck");
               item.isStuck = true;
 
               if (item.placeholder) {
                 item.placeholder = angular.element("<div></div>")
-                    .css({height: item.element.outerHeight() + "px"})
+                    .css({height: item.element.outerHeight(false) + "px"})
                     .insertBefore(item.element);
               }
             }
